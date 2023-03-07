@@ -1,15 +1,26 @@
 import ErrorRepository from '../ErrorRepository';
 
-test('error text', () => {
-  const errorNew = new ErrorRepository([[404, 'Server not responding']]);
-  const result = errorNew.translate(404);
+describe('ErrorRepository', () => {
+  test('should return the correct error message', () => {
+    const errors = {
+      404: 'Invalid input',
+      405: 'Server error',
+    };
 
-  expect(result).toBe('Server not responding');
-});
+    const errorRepository = new ErrorRepository(errors);
 
-test('not found', () => {
-  const errorNew = new ErrorRepository([[404, 'Server not responding']]);
-  const result = errorNew.translate(405);
+    expect(errorRepository.translate('404')).toEqual('Invalid input');
+    expect(errorRepository.translate('405')).toEqual('Server error');
+  });
 
-  expect(result).toBe('Not Found');
+  test('should return "Not Found"', () => {
+    const errors = {
+      404: 'Invalid input',
+      405: 'Server error',
+    };
+
+    const errorRepository = new ErrorRepository(errors);
+
+    expect(errorRepository.translate('403')).toEqual('Not Found');
+  });
 });

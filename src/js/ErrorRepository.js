@@ -1,6 +1,10 @@
 export default class ErrorRepository {
-  constructor(errors = []) {
-    this.errors = new Map(errors);
+  constructor(errors = {}) {
+    this.errors = new Map();
+
+    Object.keys(errors).forEach((code) => {
+      this.errors.set(code, errors[code]);
+    });
   }
 
   translate(code) {
