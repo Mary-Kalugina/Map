@@ -1,9 +1,13 @@
 export default class ErrorRepository {
-  constructor(errors = {}) {
+  constructor() {
     this.errors = new Map();
+    this.errorsObj = {
+      404: 'Invalid input',
+      405: 'Server error',
+    };
 
-    Object.keys(errors).forEach((code) => {
-      this.errors.set(code, errors[code]);
+    Object.keys(this.errorsObj).forEach((code) => {
+      this.errors.set(code, this.errorsObj[code]);
     });
   }
 
